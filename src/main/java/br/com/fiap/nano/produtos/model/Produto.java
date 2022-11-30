@@ -2,9 +2,9 @@ package br.com.fiap.nano.produtos.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Produto {
-
     private Long id;
     private String nome;
     private String descricao;
@@ -12,17 +12,31 @@ public class Produto {
     private Categoria categoria;
     private LocalDateTime dataCadastro;
 
-
     public Produto() {
     }
 
     public Produto(Long id, String nome, String descricao, BigDecimal preco, Categoria categoria, LocalDateTime dataCadastro) {
-        this.id = id;
-        this.nome = nome;
-        this.descricao = descricao;
-        this.preco = preco;
-        this.categoria = categoria;
-        this.dataCadastro = dataCadastro;
+        this.setId(id);
+        this.setNome(nome);
+        this.setDescricao(descricao);
+        this.setPreco(preco);
+        this.setCategoria(categoria);
+        this.setDataCadastro(dataCadastro);
+    }
+
+
+    public Produto(String nome, String descricao, BigDecimal preco, Categoria categoria, LocalDateTime dataCadastro) {
+        this.setNome(nome);
+        this.setDescricao(descricao);
+        this.setPreco(preco);
+        this.setCategoria(categoria);
+        this.setDataCadastro(dataCadastro);
+    }
+
+
+    @Override
+    public String toString() {
+        return getNome();
     }
 
     public Long getId() {
@@ -80,7 +94,15 @@ public class Produto {
     }
 
     @Override
-    public String toString() {
-        return nome;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Produto produto = (Produto) o;
+        return nome.equals(produto.nome) && categoria.equals(produto.categoria);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nome, categoria);
     }
 }
