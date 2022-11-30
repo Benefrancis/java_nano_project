@@ -36,7 +36,7 @@ public class ProdutoCollectionRepository {
     public static List<Produto> findAll(){
         return produtos;
     }
-    private static Produto save(Produto produto) {
+    public static Produto save(Produto produto) {
         if (!produtos.contains(produto)) {
             produto.setId((long) produtos.size() + 1);
             produtos.add(produto);
